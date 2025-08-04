@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="India's most trusted CoC marketplace - Buy & sell Clash of Clans accounts and clans safely. Trusted Indian website with verified listings, secure transactions, and community support.">
+    <meta name="keywords" content="clash of clans, coc accounts, buy clash account, sell clash account, clash of clans clans, coc marketplace, town hall, trusted, indian, marketplace, safe, secure">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="Coc Trade - Trusted Indian Website for Clash of Clans Trading">
+    <meta property="og:description" content="India's most trusted CoC marketplace for Clash of Clans accounts and clans. Find your perfect account or sell yours with confidence.">
+    <meta property="og:image" content="/assets/logo.png">
+    <meta property="og:url" content="https://coctrade.com">
+    <meta property="og:type" content="website">
+    
+    <title>Coc Trade - Trusted Indian Website for Clash of Clans Trading</title>
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Coc Trade - Trusted Indian Website",
+        "url": "https://coctrade.com",
+        "description": "India's most trusted marketplace for buying and selling Clash of Clans accounts and clans",
+        "areaServed": "IN",
+        "inLanguage": "en-IN",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://coctrade.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Coc Trade",
+        "url": "https://coctrade.com",
+        "logo": "https://coctrade.com/assets/logo.png",
+        "areaServed": "IN",
+        "description": "India's most trusted Clash of Clans marketplace",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "coctradeindia@gmail.com",
+            "contactType": "Customer Service"
+        }
+    }
+    </script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner hidden">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <!-- Payment Banner -->
+    <div class="payment-banner">
+        <div class="container">
+            <div class="payment-banner__content">
+                <span>⚠️ We accept UPI payments only. Contact us for payment instructions.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Currency Toggle -->
+    <div class="currency-toggle">
+        <div class="container">
+            <div class="currency-toggle__content">
+                <span>Currency:</span>
+                <button id="currencyToggle" class="btn btn--sm btn--secondary">
+                    <span id="currencyLabel">INR</span>
+                </button>
+                <span id="exchangeRate" class="exchange-rate"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header__content">
+                <div class="header__logo">
+                    <img src="/assets/logo.png" alt="Coc Trade Logo" class="logo-img">
+                </div>
+                <nav class="header__nav">
+                    <button class="nav-btn" data-section="home">Home</button>
+                    <button class="nav-btn" data-section="browse">Browse Accounts</button>
+                    <button class="nav-btn" data-section="clans">Clans</button>
+                    <button class="nav-btn" data-section="sell">Sell Account</button>
+                    <button class="nav-btn" data-section="sell-clan">Sell Clan</button>
+                    <button class="nav-btn" data-section="contact">Contact</button>
+                    <button id="dashboardBtn" class="nav-btn hidden" data-section="dashboard">Dashboard</button>
+                    <button id="authBtn" class="nav-btn" data-section="login">Login/Register</button>
+                    <button id="logoutBtn" class="nav-btn hidden">Logout</button>
+                </nav>
+                <div class="header__actions">
+                    <div class="header__search">
+                        <input type="text" id="searchInput" placeholder="Search accounts..." class="form-control">
+                        <button class="btn btn--primary" id="searchBtn">Search</button>
+                    </div>
+                    <button id="themeToggle" class="theme-toggle" title="Toggle theme">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                </div>
+                <div class="header__user">
+                    <span id="userStatus">Guest User</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Home Section -->
+        <section id="home" class="section section--active">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="container">
+                    <div class="hero__content">
+                        <h1>India's Most Trusted Clash of Clans Marketplace</h1>
+                        <p>Connect with trusted buyers and sellers in the Clash of Clans community. Find your perfect account or clan, or sell your existing ones with confidence on our secure platform.</p>
+                        <div class="hero__actions">
+                            <button class="btn btn--primary btn--lg" data-section="browse">Browse Accounts</button>
+                            <button class="btn btn--secondary btn--lg" data-section="clans">Browse Clans</button>
+                            <button class="btn btn--outline btn--lg" data-section="sell">Sell Your Account</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Accounts -->
+            <section class="featured-accounts">
+                <div class="container">
+                    <h2>Featured Accounts</h2>
+                    <div class="accounts-grid" id="featuredAccounts">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Clans -->
+            <section class="featured-clans">
+                <div class="container">
+                    <h2>Featured Clans</h2>
+                    <div class="clans-grid" id="featuredClans">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Trust Indicators -->
+            <section class="trust-section">
+                <div class="container">
+                    <h2>Why Choose Coc Trade?</h2>
+                    <div class="trust-grid" id="trustFeatures">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonials -->
+            <section class="testimonials">
+                <div class="container">
+                    <h2>What Our Users Say</h2>
+                    <div class="testimonials-grid" id="testimonialsContainer">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- Browse Accounts Section -->
+        <section id="browse" class="section">
+            <div class="container">
+                <h1>Browse Accounts</h1>
+                
+                <!-- Filters -->
+                <div class="filters">
+                    <div class="filter-group">
+                        <label for="thFilter">Town Hall Level:</label>
+                        <select id="thFilter" class="form-control">
+                            <option value="">All Levels</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="priceFilter">Max Price:</label>
+                        <select id="priceFilter" class="form-control">
+                            <option value="">Any Price</option>
+                            <option value="5000">Under ₹5,000</option>
+                            <option value="10000">Under ₹10,000</option>
+                            <option value="20000">Under ₹20,000</option>
+                            <option value="50000">Under ₹50,000</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="sortFilter">Sort by:</label>
+                        <select id="sortFilter" class="form-control">
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="th-high">Town Hall Level</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="accounts-grid" id="browseAccounts">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Browse Clans Section -->
+        <section id="clans" class="section">
+            <div class="container">
+                <h1>Browse Clans</h1>
+                
+                <!-- Clan Filters -->
+                <div class="filters">
+                    <div class="filter-group">
+                        <label for="clanLevelFilter">Clan Level:</label>
+                        <select id="clanLevelFilter" class="form-control">
+                            <option value="">All Levels</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="warLeagueFilter">War League:</label>
+                        <select id="warLeagueFilter" class="form-control">
+                            <option value="">All Leagues</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="clanPriceFilter">Max Price:</label>
+                        <select id="clanPriceFilter" class="form-control">
+                            <option value="">Any Price</option>
+                            <option value="5000">Under ₹5,000</option>
+                            <option value="15000">Under ₹15,000</option>
+                            <option value="30000">Under ₹30,000</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="clans-grid" id="browseClans">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section">
+            <div class="container">
+                <h1>My Dashboard</h1>
+                
+                <div class="dashboard-stats" id="dashboardStats">
+                    <!-- Populated by JavaScript -->
+                </div>
+
+                <div class="dashboard-tabs">
+                    <button class="dashboard-tab dashboard-tab--active" data-tab="accounts">My Accounts</button>
+                    <button class="dashboard-tab" data-tab="clans">My Clans</button>
+                    <button class="dashboard-tab" data-tab="profile">Profile</button>
+                </div>
+
+                <div id="accountsTab" class="dashboard-content dashboard-content--active">
+                    <div class="dashboard-listings" id="userAccounts">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div id="clansTab" class="dashboard-content">
+                    <div class="dashboard-listings" id="userClans">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div id="profileTab" class="dashboard-content">
+                    <form id="profileForm" class="profile-form">
+                        <div class="form-group">
+                            <label class="form-label">Name</label>
+                            <input type="text" name="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" required readonly>
+                        </div>
+                        <button type="submit" class="btn btn--primary">Update Profile</button>
+                    </form>
+                    
+                    <form id="passwordForm" class="profile-form">
+                        <h3>Change Password</h3>
+                        <div class="form-group">
+                            <label class="form-label">Current Password</label>
+                            <input type="password" name="currentPassword" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">New Password</label>
+                            <input type="password" name="newPassword" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Confirm New Password</label>
+                            <input type="password" name="confirmPassword" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn--primary">Change Password</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sell Account Section -->
+        <section id="sell" class="section">
+            <div class="container">
+                <h1>Sell Your Account</h1>
+                
+                <form id="sellForm" class="sell-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Account Title *</label>
+                            <input type="text" name="title" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Town Hall Level *</label>
+                            <select name="townHall" class="form-control" required>
+                                <option value="">Select TH Level</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Player Level *</label>
+                            <input type="number" name="playerLevel" class="form-control" min="1" max="500" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Trophy Count *</label>
+                            <input type="number" name="trophies" class="form-control" min="0" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Asking Price (INR) *</label>
+                            <input type="number" name="price" class="form-control" min="100" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Gems Count</label>
+                            <input type="number" name="gems" class="form-control" min="0">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea name="description" class="form-control" rows="3" placeholder="Describe your account's features..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Features (comma-separated)</label>
+                        <input type="text" name="features" class="form-control" placeholder="Max Heroes, Max Defenses, High Trophies">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="terms" required>
+                            I understand the risks involved in account trading and agree to the terms
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn--primary btn--full-width">List My Account</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Sell Clan Section -->
+        <section id="sell-clan" class="section">
+            <div class="container">
+                <h1>Sell Your Clan</h1>
+                
+                <form id="sellClanForm" class="sell-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Clan Name *</label>
+                            <input type="text" name="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Clan Level *</label>
+                            <select name="level" class="form-control" required>
+                                <option value="">Select Clan Level</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Members Count *</label>
+                            <input type="number" name="members" class="form-control" min="0" max="50" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">War League *</label>
+                            <select name="league" class="form-control" required>
+                                <option value="">Select War League</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Asking Price (INR) *</label>
+                            <input type="number" name="price" class="form-control" min="500" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea name="description" class="form-control" rows="3" placeholder="Describe your clan..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="clanTerms" required>
+                            I understand the risks involved in clan trading and agree to the terms
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn--primary btn--full-width">List My Clan</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="container">
+                <h1>Contact Us</h1>
+                
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>Get in Touch</h3>
+                        <div class="contact-details" id="contactDetails">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form-container">
+                        <h3>Send us a Message</h3>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label class="form-label">Name *</label>
+                                <input type="text" name="name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email *</label>
+                                <input type="email" name="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Subject *</label>
+                                <input type="text" name="subject" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Message *</label>
+                                <textarea name="message" class="form-control" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn--primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- FAQ Section -->
+                <section class="faq-section">
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="faq-list" id="faqList">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <!-- Login/Register Section -->
+        <section id="login" class="section">
+            <div class="container">
+                <div class="auth-container">
+                    <div class="auth-tabs">
+                        <button class="auth-tab auth-tab--active" data-tab="login">Login</button>
+                        <button class="auth-tab" data-tab="register">Register</button>
+                    </div>
+
+                    <div id="loginTab" class="auth-form auth-form--active">
+                        <h2>Login to Your Account</h2>
+                        <form id="loginForm">
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="email" name="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Password</label>
+                                <input type="password" name="password" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn--primary btn--full-width">Login</button>
+                        </form>
+                    </div>
+
+                    <div id="registerTab" class="auth-form">
+                        <h2>Create New Account</h2>
+                        <form id="registerForm">
+                            <div class="form-group">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" name="name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="email" name="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Password</label>
+                                <input type="password" name="password" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Confirm Password</label>
+                                <input type="password" name="confirmPassword" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn--primary btn--full-width">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Account Detail Modal -->
+    <div id="accountModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle"></h2>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Clan Detail Modal -->
+    <div id="clanModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="clanModalTitle"></h2>
+                <button class="modal-close" id="closeClanModal">&times;</button>
+            </div>
+            <div class="modal-body" id="clanModalBody">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="editModalTitle"></h2>
+                <button class="modal-close" id="closeEditModal">&times;</button>
+            </div>
+            <div class="modal-body" id="editModalBody">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__section">
+                    <h3>Coc Trade</h3>
+                    <p>India's most trusted educational platform for Clash of Clans account and clan trading information.</p>
+                </div>
+                <div class="footer__section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><button class="nav-btn" data-section="home">Home</button></li>
+                        <li><button class="nav-btn" data-section="browse">Browse Accounts</button></li>
+                        <li><button class="nav-btn" data-section="clans">Browse Clans</button></li>
+                        <li><button class="nav-btn" data-section="sell">Sell Account</button></li>
+                        <li><button class="nav-btn" data-section="contact">Contact</button></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h4>Contact</h4>
+                    <p>Email: coctradeindia@gmail.com</p>
+                    <p>UPI: sagar.32@superyes</p>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <div class="footer__disclaimer">
+                    <p><strong>⚠️ IMPORTANT DISCLAIMER:</strong> Account and clan trading violates Supercell's Terms of Service and may result in permanent bans. All trades are at your own risk. This platform is for educational purposes only. We are not affiliated with Supercell or any gaming company.</p>
+                </div>
+                <p>&copy; 2025 Coc Trade. Educational purposes only. Not affiliated with Supercell.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
